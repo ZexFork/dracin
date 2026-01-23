@@ -24,7 +24,13 @@ app.use(cors());
 app.use('/api', apiRouter);
 
 // Jalankan server
-app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
-  console.log(`Dokumentasi tersedia di http://localhost:${PORT}`);
-});
+// Jalankan server jika tidak di environment Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
+    console.log(`Dokumentasi tersedia di http://localhost:${PORT}`);
+  });
+}
+
+// Penting untuk Vercel!
+export default app;
